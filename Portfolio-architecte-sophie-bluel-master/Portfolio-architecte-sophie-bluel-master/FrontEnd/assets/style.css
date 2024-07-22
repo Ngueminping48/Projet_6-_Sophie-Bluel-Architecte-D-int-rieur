@@ -80,7 +80,9 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #B1663C
 }
 
 h2{
@@ -98,8 +100,15 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	font-weight: 300;
+	font-size: 1rem;
+	font-family: Work Sans;
 }
 
+nav img {
+width: 25px;
+
+}
 li:hover {
 	color: #B1663C;
 }
