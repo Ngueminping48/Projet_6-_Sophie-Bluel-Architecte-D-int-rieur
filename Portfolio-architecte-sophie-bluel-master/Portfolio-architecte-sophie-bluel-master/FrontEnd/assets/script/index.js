@@ -1,9 +1,15 @@
 "use strict"; //
 
+const works = []; // Tableau vide pour stocker les travaux
+let deleteBtn = [];
+let token ;
+
+// ********** FUNCTIONS ********** //
+
 document.addEventListener("DOMContentLoaded", function () {
   // Code pour lancer l'application
   console.log("Application en cours de chargement...");
-  const token = localStorage.getItem("token");
+  token = localStorage.getItem("token");
   if (token) {
     document.getElementById("login-url").style.display = "none";
     document.getElementById("logout").style.display = "block";
@@ -21,8 +27,8 @@ const getWorks = async () => {
 
   try {
     const response = await fetch("http://localhost:5678/api/works");
-    const works = await response.json();
-    console.log(works);
+    const data = await response.json();
+    works.push(...data); // Ajout des travaux dans le tableau
 
     works.forEach((work) => {
       const figure = document.createElement("figure");
@@ -57,3 +63,57 @@ const getCategories = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", getCategories);
+
+// Modal 
+
+document.getElementById("close-modal").addEventListener("click", function () {
+  document.getElementById("modal").style.display = "none";
+  document.getElementById("modal").style.opacity = 0;
+});
+
+document.getElementById("open-modal").addEventListener("click", function () {
+  document.getElementById("modal").style.display = "block";
+  document.getElementById("modal").style.opacity = 1;
+  const modalImages = document.getElementById("modal-images")
+  works.forEach((work) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+              <img src="${work.imageUrl}" alt="${work.title}">
+              <span class="delete"><i class="fa-solid fa-trash-can"></i></span>`;
+    modalImages.appendChild(li);
+  });
+  const deleteWorks = document.getElementsByClassName("delete")
+  console.log(deleteWorks)
+    deleteBtn = [...deleteWorks];
+    
+    for (let i = 0; i < deleteBtn.length; i++) {
+        deleteBtn[i].addEventListener('click', async function () {
+            if (confirm('Voulez-vous supprimer cette image ?')) {
+
+                try {
+                    const response = await fetch(`http://localhost:5678/api/works/${works[i].id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                } catch (error) {
+                    
+                }
+
+        
+            }
+        })
+
+
+
+    }
+
+    
+    
+})
+
+
+
+
+

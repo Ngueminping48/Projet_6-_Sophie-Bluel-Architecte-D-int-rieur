@@ -10,11 +10,72 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
+
   <body>
+    <div id="modifier" class="modifier">
+      <button>
+        <span><i class="fa-regular fa-pen-to-square"></i></span
+        ><span>Mode édition</span>
+      </button>
+    </div>
+    <div id="modal">
+      <div id="modal-content">
+        <button id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+        <div id="modal-gallery">
+          <h2>Galerie photo</h2>
+          <ul id="modal-images"></ul>
+        </div>
+
+        <div class="modal-footer">
+          <div><button id="open-second-modal">Ajouter une photo</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="overflow-modal">
+      <div id="second-modal-content">
+        <button id="return-second-modal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <button id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-title">
+          <h2>Ajout photo</h2>
+        </div>
+
+        <div class="modal-header">
+          <i class="fa-regular fa-image"></i>
+          <button id="add-photo-modal">+ Ajouter photo</button>
+          <span> jpg, png: 4mo max</span>
+        </div>
+
+        <!-- Contenu de la deuxième modale -->
+        <form id="create-works-form">
+          <label for="file">Titre</label>
+          <input type="text" placeholder="Titre" />
+          <label for="Catégorie">Catégorie</label>
+          <select>
+            <option value="Catégorie"></option>
+            <option value="Objets">Objets</option>
+            <option value="Appartements">Appartements</option>
+            <option value="Hotels & restaurants">Hotels & restaurants</option>
+          </select>
+          <div class="create-works-btn">
+            <div><button id="create-works">Valider</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -56,7 +117,13 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="heading">
+          <h2>Mes Projets</h2>
+          <button id="open-modal">
+            <span><i class="fa-regular fa-pen-to-square"></i></span
+            ><span>Modifier</span>
+          </button>
+        </div>
         <ul id="categories" class="filter">
           <li><button>Tous</button></li>
         </ul>
@@ -84,7 +151,6 @@
         </ul>
       </nav>
     </footer>
-
-    <script src="./assets/script/index.js"></script>
+    <script type="text/javascript" src="./assets/script/index.js"></script>
   </body>
 </html>
