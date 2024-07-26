@@ -206,7 +206,7 @@ body {
 }
 
 #overflow-modal {
-	display: block;
+	display: none;
 	position: fixed;
 	z-index: 100;
 	left: 0;
@@ -216,6 +216,7 @@ body {
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.4);
 	transition: opacity 1s ease-in-out ;
+	opacity: 0;
 }
 
 .modal-title {
@@ -433,6 +434,10 @@ nav a:hover {
 }
 
 .logout {
+	display: none;
+}
+
+#fileInput {
 	display: none;
 }
 
