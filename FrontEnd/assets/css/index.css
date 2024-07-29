@@ -1,0 +1,58 @@
+body {
+  background-color: #FFFEF8;
+  font-family: work sans;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+}
+#login h2 {
+  margin-bottom: 20px;
+  color: #1d6154;
+  font-family: Syne;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+}
+#login .email {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#login .email label {
+  margin-bottom: 3px;
+}
+#login .password {
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+}
+#login .password label {
+  margin-bottom: 3px;
+}
+#login input {
+  padding: 10px;
+  width: 400px;
+  border: 1px;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.15);
+}
+#login input[type=submit] {
+  width: 180px;
+  border-radius: 60px;
+}
+#login a {
+  color: #3D3D3D;
+}
+#login a:hover {
+  color: #1d6154;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}/*# sourceMappingURL=index.css.map */
