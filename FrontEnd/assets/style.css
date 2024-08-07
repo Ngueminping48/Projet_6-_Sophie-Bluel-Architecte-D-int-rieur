@@ -141,7 +141,7 @@ body {
   padding: 70px;
   border: 1px solid #888;
   width: 40%;
-  height: 70%;
+  min-height: 50%;
 }
 
 #imageContainer {
@@ -344,7 +344,7 @@ body {
 
 #create-works-form button {
   margin-top: 20px;
-  background-color: #cbd6dc;
+  background-color: #a7a7a7;
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -352,6 +352,9 @@ body {
   padding: 10px 20px;
   border-radius: 50px;
   width: 200px;
+  font-family: 'syne';
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .unenabled-button {
@@ -575,6 +578,7 @@ nav li:visited {
 
 .filter button {
   padding: 10px 20px;
+  font-family: 'syne';
   /*background-color: #1D6154; */
   background-color: transparent;
   border: 1px solid #1d6154;
@@ -586,6 +590,7 @@ nav li:visited {
 .category__btn {
   background-color: transparent;
   /* Couleur de fond initiale */
+  color: #1d6154;
 }
 
 .category__btn.active {
