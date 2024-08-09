@@ -5,16 +5,16 @@ const worksElt = document.getElementById('work');
 const categoriesElt = document.getElementById('categories');
 // ********** VARIABLES ********** //
 let works = [];
-let categories = []; // array of objects with id and name properties
+let categories = []; 
 let token = '';
 let file;
 // ********** FUNCTIONS ********** //
 // ***** DATA ***** //
 /**
- * Fetches data of a specific type from a URL and returns the parsed JSON data.
+ * Récupère les données d'un type spécifié.
  *
- * @param {type} type - The type of data to fetch.
- * @return {Promise} Parsed JSON data fetched from the URL.
+ * @param {string} type - Le type de données à récupérer.
+ * @return {Promise} Les données récupérées.
  */
 const getData = async (type) => {
   try {
@@ -26,9 +26,9 @@ const getData = async (type) => {
   }
 }
 /**
- * Fetches works data from the server and displays them on the page.
+ * Affiche de manière asynchrone les œuvres en récupérant les données du serveur et en créant dynamiquement des éléments figure pour chaque œuvre.
  *
- * @return {Promise<void>} A Promise that resolves when the works are displayed.
+ * @return {Promise<void>} Une promesse qui se résout lorsque toutes les œuvres ont été affichées.
  */
 const displayWorks = async () => {
   works = await getData('works');
@@ -42,9 +42,10 @@ const displayWorks = async () => {
   }
 }
 /**
- * Asynchronously fetches category data from the server and displays them as buttons on the page.
+ * Récupère de manière asynchrone les données des catégories depuis le serveur et crée des boutons pour chaque catégorie.
+ * Les boutons sont ajoutés à l'élément categoriesElt.
  *
- * @return {Promise<void>} A Promise that resolves when the categories are displayed.
+ * @return {Promise<void>} Une promesse qui se résout lorsque tous les boutons ont été créés et ajoutés.
  */
 const displayCategories = async () => {
   categories = await getData('categories');
@@ -61,8 +62,11 @@ const displayCategories = async () => {
 }
 // ***** FIRST MODAL ***** //
 /**
- * Opens a modal and displays a list of works with delete buttons. When a delete button is clicked,
- * it prompts the user to confirm the deletion and sends a DELETE request to the server to delete the corresponding work.
+ * Ouvre une modale affichant une liste de travaux avec des boutons de suppression pour chaque travail.
+ * Lorsqu'un bouton de suppression est cliqué, une boîte de dialogue de confirmation est affichée.
+ * Si l'utilisateur confirme, le travail correspondant est supprimé du serveur.
+ *
+ * @return {void}
  */
 const openModal = () => {
   let deleteBtn = [];
@@ -97,14 +101,19 @@ const openModal = () => {
   }
 }
 /**
- * Closes the modal by setting its display to 'none' and opacity to 0.
+ * Ferme la fenêtre modale en définissant sa visibilité sur 'none' et son opacité à 0.
+ *
+ * @return {void} Cette fonction ne retourne rien.
  */
 const closeModal = () => {
   document.getElementById('modal').style.display = 'none';
   document.getElementById('modal').style.opacity = 0;
 }
 /**
- * Returns to the modal by hiding the overflow modal and showing the main modal.
+ * Rend le modal visible en définissant sa propriété "display" sur "block" et son opacité sur 1,
+ * et cache le modal de débordement en définissant sa propriété "display" sur "none" et son opacité sur 0.
+ *
+ * @return {void} Cette fonction ne retourne rien.
  */
 const returnToModal = () => {
   document.getElementById("overflow-modal").style.display = "none";
@@ -114,7 +123,10 @@ const returnToModal = () => {
 }
 // ***** SECOND MODAL *****
 /**
- * Opens the second modal and populates the category dropdown with options.
+ * Ouvre la deuxième modale, masque la première modale, vide l'élément des catégories 
+ * et le remplit d'options basées sur les données de catégories fournies.
+ *
+ * @return {void} Cette fonction ne retourne rien.
  */
 const openSecondModal = () => {
   document.getElementById("overflow-modal").style.display = "block";
@@ -133,16 +145,19 @@ const openSecondModal = () => {
   }
 };
 /**
- * Closes the second modal by setting its display to "none" and opacity to 0.
+ * Ferme la deuxième modal en définissant son affichage sur "none" et son opacité sur 0.
+ *
+ * @return {void} Cette fonction ne renvoie rien.
  */
 const closeSecondModal = () => {
   document.getElementById("overflow-modal").style.display = "none";
   document.getElementById("overflow-modal").style.opacity = 0;
 }
 /**
- * sélectionne un fichier image sur l'appareil de l'utilisateur et l'affiche dans l'élément 'imageContainer'.
- 
- * Selects an image file from the user's device and displays it in the 'imageContainer' element.
+ * Sélectionne un fichier image à partir de l'élément d'entrée de fichier et l'affiche dans l'élément 'imageContainer'.
+ * Masque l'élément 'imageIcon' et affiche l'élément 'imageContainer'.
+ *
+ * @return {void} Cette fonction ne renvoie rien.
  */
 const selectImage = () => {
   const fileInput = document.getElementById('fileInput');
@@ -151,13 +166,12 @@ const selectImage = () => {
     file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      /**
-       * Sets the source of an image element to the result of a FileReader and
-       * appends it to the 'imageContainer' element. Hides the 'imageIcon' element
-       * and displays the 'imageContainer' element.
-       *
-       * @param {Event} e - The event object containing the result of the FileReader.
-       */
+            /**
+             * Définit la source d'un élément image avec le résultat d'un FileReader et l'ajoute au conteneur 'imageContainer'. Masque l'élément 'imageIcon' et affiche le conteneur 'imageContainer'.
+             *
+             * @param {Event} e - L'objet événement contenant le résultat du FileReader.
+             * @return {void} Cette fonction ne retourne rien.
+             */
       reader.onload = (e) => {
         const imgElement = document.createElement('img');
         imgElement.src = e.target.result;
@@ -173,10 +187,10 @@ const selectImage = () => {
   fileInput.click();
 };
 /**
- * Submits a work to the server.
+ * Envoie un travail au serveur.
  *
- * @param {Event} event - The event object triggered by the form submission.
- * @return {Promise<void>} A promise that resolves when the work is successfully submitted, or rejects with an error if there was a problem.
+ * @param {Event} event - L'objet d'événement déclenché par la soumission du formulaire.
+ * @return {Promise<void>} Une promesse qui se résout lorsque le travail est envoyé avec succès, ou qui se rejette avec une erreur si un problème se produit.
  */
 const submitWork = async (event) => {
   event.preventDefault();
@@ -212,7 +226,9 @@ const submitWork = async (event) => {
 };
 //  ***** RUN ***** 
 /**
- * Logs out the user by removing the token from local storage and updating the display of the login and logout buttons.
+ * Déconnecte l'utilisateur en supprimant le jeton de stockage local et en mettant à jour l'affichage des boutons de connexion et de déconnexion.
+ *
+ * @return {void} Cette fonction ne renvoie rien.
  */
 const logout = () => {
   localStorage.removeItem('token');
@@ -221,10 +237,11 @@ const logout = () => {
 }
 // ***** FILTER *****
 /**
- * Filters works based on the given category ID and updates the DOM to display only the filtered works.
+ * Filtre les travaux en fonction de l'ID de catégorie donné et met à jour le DOM avec les travaux filtrés.
  *
- * @param {number} categoryId - The ID of the category to filter works by.
- * @param {HTMLElement} button - The button element that triggered the filter.
+ * @param {number} categoryId - L'ID de la catégorie pour filtrer les travaux.
+ * @param {HTMLElement} button - L'élément de bouton qui a déclenché le filtre.
+ * @return {void} Cette fonction ne renvoie rien.
  */
 const filterWorks = (categoryId, button) => {
   const worksdoc = document.getElementById('work');
@@ -247,6 +264,7 @@ const filterWorks = (categoryId, button) => {
   document.getElementById('all-work').classList.remove('btn-all');
 };
 // ********** MAIN ********** //
+
 document
   .getElementById('return-second-modal')
   .addEventListener('click', returnToModal);
@@ -254,16 +272,19 @@ document.getElementById('add-photo').addEventListener('click', openSecondModal);
 document
   .getElementById('second-close-modal')
   .addEventListener('click', closeSecondModal);
+
 // ***** FUNCTION CHANGE BUTTON COLOR *****
+
 document.addEventListener('DOMContentLoaded', function () {
   const titleInput = document.getElementById('title');
   const fileInput = document.getElementById('fileInput');
   const categorySelect = document.getElementById('category');
   const submitButton = document.getElementById('create-works');
+
   /**
-   * Checks if the input fields for title, category, and file are not empty.
-   * If all fields are not empty, it enables the submit button and adds the 'enabled-button' class.
-   * If any field is empty, it disables the submit button and adds the 'unenabled-button' class.
+   * Vérifie les valeurs des champs de titre, de catégorie et de fichier pour déterminer si le bouton de soumission doit être activé ou désactivé.
+   *
+   * @return {void} Cette fonction ne renvoie pas de valeur.
    */
   function checkInputs() {
     const titleValue = titleInput.value.trim();
